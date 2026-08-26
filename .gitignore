@@ -1,0 +1,17 @@
+# Windows
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+
+# Tussenbestanden van het ophalen vanaf Base44
+capture/
+*.err
+err*.txt
+
+# Editors
+.vscode/
+.idea/
+*.swp

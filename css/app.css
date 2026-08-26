@@ -1,0 +1,37 @@
+/* Aanvullingen op de originele stylesheet (css/site.css).
+   Alles hier vervangt gedrag dat op de originele site door React/framer-motion werd gedaan.
+   De regels hangen aan .js op <html>; zonder JavaScript blijft alles gewoon zichtbaar. */
+
+/* --- infaden bij scrollen (was framer-motion) ------------------------------ */
+.js [data-reveal] {
+  opacity: 0;
+  transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+  will-change: opacity, transform;
+}
+.js [data-reveal="up"]    { transform: translateY(20px); }
+.js [data-reveal="down"]  { transform: translateY(-20px); }
+.js [data-reveal="left"]  { transform: translateX(-10px); }
+.js [data-reveal="right"] { transform: translateX(20px); }
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+
+/* --- mobiel menu (was React-state) ---------------------------------------- */
+.js #mobile-menu {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height .35s ease, opacity .35s ease;
+}
+.js #mobile-menu.is-open {
+  max-height: 30rem;
+  opacity: 1;
+}
+
+/* --- projectenfilter ------------------------------------------------------ */
+[data-project-card].is-hidden { display: none; }
