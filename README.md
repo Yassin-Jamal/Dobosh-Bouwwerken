@@ -73,6 +73,18 @@ Op de originele site deed React het bewegende werk. Dat is hier met gewone JavaS
   niet, dan valt hij terug op scrollen en uiteindelijk op "gewoon alles tonen". De tekst kan dus
   nooit onzichtbaar blijven staan, ook niet als JavaScript uitvalt.
 - **Mobiel menu, projectenfilter, carousel en lightbox** — allemaal in `js/app.js`.
+- **De reviews staan in een lopende band** (het origineel had een raster van drie).
+  Ze schuiven van rechts naar links en staan stil zodra je er met de muis overheen gaat.
+  `js/app.js` verdubbelt de kaarten zodat de band naadloos rondloopt, en berekent de
+  snelheid mee met het aantal reviews. Zonder JavaScript kun je ze zijwaarts scrollen.
+
+  Een review toevoegen doe je gewoon door een kaart bij te zetten in
+  `parts/index.html` — de band past zich vanzelf aan.
+
+> **Let op bij het stylen:** `css/site.css` is de *gecompileerde* stylesheet van de
+> originele site en bevat alleen klassen die daar al gebruikt werden. Een nieuwe
+> Tailwind-klasse als `w-[380px]` of `mr-6` doet dus niets. Zulke aanpassingen horen in
+> `css/app.css` (zie `.review-card` daar als voorbeeld).
 
 ## Let op
 

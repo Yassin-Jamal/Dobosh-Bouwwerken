@@ -186,9 +186,37 @@
     });
   }
 
+  /* ------------------------------------------------------ lopende band met reviews */
+  function initReviewsMarquee() {
+    var wrap = document.querySelector('.reviews-marquee');
+    if (!wrap) return;
+    var track = wrap.querySelector('.reviews-track');
+    if (!track || !track.children.length) return;
+
+    var cards = Array.prototype.slice.call(track.children);
+
+    // breedte van één set meten vóór het dupliceren
+    var setWidth = track.scrollWidth;
+    if (!setWidth) return;
+
+    // set verdubbelen, zodat de band naadloos kan rondlopen: op -50% staat
+    // de kopie precies waar het origineel begon
+    cards.forEach(function (card) {
+      var clone = card.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
+    });
+
+    // snelheid gelijk houden, ongeacht het aantal reviews
+    var pixelsPerSeconde = 60;
+    track.style.setProperty('--reviews-duration', Math.round(setWidth / pixelsPerSeconde) + 's');
+    track.classList.add('is-looping');
+  }
+
   /* ------------------------------------------------------------------------ start */
   function init() {
     initMobileMenu();
+    initReviewsMarquee();
     initFilters();
     initCarousels();
     initLightbox();

@@ -35,3 +35,44 @@
 
 /* --- projectenfilter ------------------------------------------------------ */
 [data-project-card].is-hidden { display: none; }
+
+/* --- lopende band met reviews --------------------------------------------- */
+/* Zonder JavaScript kun je de reviews gewoon zijwaarts scrollen; met JavaScript
+   worden ze verdubbeld en lopen ze vanzelf van rechts naar links. */
+.reviews-marquee { overflow-x: auto; }
+.js .reviews-marquee { overflow: hidden; }
+
+/* De breedte staat hier en niet als Tailwind-klasse: css/site.css is de
+   gecompileerde stylesheet van de originele site en bevat alleen klassen die
+   dáár al gebruikt werden. Nieuwe klassen als w-[380px] bestaan er simpelweg niet. */
+.reviews-track { align-items: stretch; }
+
+.reviews-track > .review-card {
+  flex: 0 0 auto;
+  width: 380px;
+  margin-right: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .reviews-track > .review-card { width: 85vw; }
+}
+
+.reviews-track.is-looping {
+  animation: reviews-scroll var(--reviews-duration, 30s) linear infinite;
+}
+
+/* stilzetten zodra de muis erover gaat (of iets de focus krijgt) */
+.reviews-marquee:hover .reviews-track.is-looping,
+.reviews-marquee:focus-within .reviews-track.is-looping {
+  animation-play-state: paused;
+}
+
+@keyframes reviews-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reviews-track.is-looping { animation: none; }
+  .js .reviews-marquee { overflow-x: auto; }
+}
